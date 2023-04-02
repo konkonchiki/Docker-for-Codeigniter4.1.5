@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+    web:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+        container_name: "codeigniter-local"
+        volumes:
+            - "./ci-work/:/var/www/html"
+        privileged: true
+        ports:
+            - "80:80"
+            - "8080:8080"
+        links:
+            - mysql
+        depends_on:
+            - mysql
+    mysql:
+        build:
+            context: ./docker/mysql
+            dockerfile: Dockerfile
+        volumes:
+            - ci_db_data:/var/lib/mysql
+            - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=dbtest
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=pass
+        ports:
+            - "3306:3306"
+volumes:
+    ci_db_data:

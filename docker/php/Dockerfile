@@ -14,6 +14,9 @@ RUN apt-get update && \
     libxml2-dev \
     libicu-dev && \
     docker-php-ext-install pdo_mysql mysqli pdo intl mbstring xml
+# Xdebug install
+RUN pecl install xdebug-3.1.1 && docker-php-ext-enable xdebug
+
 
 # Install MySQL client
 RUN apt-get update && \

@@ -11,7 +11,7 @@
             "request": "launch",
             "port": 9003,
             "pathMappings": {
-                "/var/www/html": "/Users/m/Documents/Parsonal/pre/learning_app/ci-work"
+                "/var/www/html": "${workspaceFolder}/ci-work"
             },
         },
         
